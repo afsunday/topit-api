@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('entry'); // debit|credit
             $table->string('status'); // pending|approved|declined
-            $table->string('date');
+            $table->dateTime('date');
             $table->timestamps();
         });
     }

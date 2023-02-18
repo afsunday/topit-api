@@ -12,8 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('data_transactions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->foreignId('user_id');
+            $table->string('orderid');
+            $table->string('statuscode');
+            $table->string('api_status');
+            $table->string('status');
+            $table->string('api_remark')->default('');
+            $table->string('ordertype');
+            $table->string('mobilenetwork');
+            $table->string('mobilenumber');
+            $table->string('api_amountcharged')->default('');
+            $table->string('amount_charged');
+            $table->string('api_balance')->default('');
+            $table->integer('query_times')->default(0);
+            $table->string('order_date');
         });
     }
 

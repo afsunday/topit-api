@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('data_networks', function (Blueprint $table) {
             $table->id();
+            $table->string('network');
+            $table->string('provider_id');
+            $table->boolean('in_store')->default(true);
             $table->timestamps();
         });
     }

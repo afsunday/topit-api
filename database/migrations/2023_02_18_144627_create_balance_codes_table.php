@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('balance_codes', function (Blueprint $table) {
             $table->id();
+            $table->string('network');
+            $table->string('code');
             $table->timestamps();
         });
     }
