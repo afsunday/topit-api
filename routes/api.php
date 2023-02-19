@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BundleController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\WalletController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,4 +24,5 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('/wallet-history', [UserController::class, 'walletHistory']);
     Route::get('/user', fn (Request $request) => $request->user());
     Route::get('/data-history', [UserController::class, 'dataHistory']);
+    Route::get('/bundle', [BundleController::class, 'bundle']);
 });

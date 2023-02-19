@@ -25,4 +25,15 @@ class DataProduct extends Model
         'product_charge_amount',
         'status',
     ];
+
+    /**
+     * Scope to only include shipper's shipment.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePurchaseAblePlans($query)
+    {
+        return $query->where('status', true)->orderBy('provider_id', 'asc');
+    }
 }
