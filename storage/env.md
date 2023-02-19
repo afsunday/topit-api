@@ -3,3 +3,6 @@ db user password
 
 server password
 logic5230##767##
+
+db user passwprd
+#w6ZwPDKrVvQ
