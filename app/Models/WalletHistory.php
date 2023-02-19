@@ -14,14 +14,12 @@ class WalletHistory extends Model
      */
     protected $fillable = [
         'user_id',
-        'transaction_amount',
-        'wallet_balance',
-        'method',
-        'gateway_ref',
+        'item_image',
         'transaction_ref',
+        'amount',
         'description',
         'entry',
         'status',
-        'date',
+        'transaction_date',
     ];
 }

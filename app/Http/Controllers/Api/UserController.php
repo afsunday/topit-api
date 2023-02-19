@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\DataTransaction;
-use App\Queries\DataProductQuery;
-use App\Queries\WalletQuery;
 use App\Support\Utils;
 use Illuminate\Http\Request;
 
@@ -16,9 +13,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function dataHistory(Request $request)
+    public function walletHistory(Request $request)
     {
-        $history = $request->user()->dataTransactions->latest()->simplePaginate();
+        $history = $request->user()->transactions()->latest()->simplePaginate();
 
         return Utils::successResp($history);
     }
@@ -28,10 +25,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function walletHistory(Request $request)
+    public function peers(Request $request)
     {
-        $history = WalletQuery::getUserWalletHistory($request, $request->user()->id, $request->limit ?? null);
+        $peers = $request->user()->peers()->latest()->simplePaginate(15);
 
-        return Utils::successResp($history);
+        return Utils::successResp($peers);
     }
 }

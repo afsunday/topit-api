@@ -56,8 +56,16 @@ class User extends Authenticatable
     /**
      * get user data transactions
      */
-    public function dataTransactions()
+    public function transactions()
     {
-        return $this->hasMany(DataTransaction::class);
+        return $this->hasMany(WalletHistory::class);
+    }
+
+    /**
+     * get user data transactions
+     */
+    public function peers()
+    {
+        return $this->hasMany(PeerFriend::class);
     }
 }

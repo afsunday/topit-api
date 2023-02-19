@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('balance_codes', function (Blueprint $table) {
+        Schema::create('peer_friends', function (Blueprint $table) {
             $table->id();
-            $table->string('network');
-            $table->string('code');
+            $table->foreignId('user_id');
+            $table->string('avatar');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('phone_number');
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('balance_codes');
+        Schema::dropIfExists('peer_friends');
     }
 };

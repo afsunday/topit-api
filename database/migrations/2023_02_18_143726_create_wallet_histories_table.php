@@ -14,16 +14,13 @@ return new class extends Migration
         Schema::create('wallet_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
-            $table->foreignId('data_transaction_id')->nullable()->index();
-            $table->string('transaction_amount');
-            $table->string('wallet_balance');
-            $table->string('method');// webpay|cash
-            $table->string('gateway_ref'); // paystack:ref|api:orderid
-            $table->string('transaction_ref')->index();
+            $table->string('item_image');
+            $table->string('transaction_ref');
+            $table->string('amount');
             $table->string('description');
             $table->string('entry'); // debit|credit
             $table->string('status'); // pending|approved|declined
-            $table->dateTime('date');
+            $table->dateTime('transaction_date');
             $table->timestamps();
         });
     }
