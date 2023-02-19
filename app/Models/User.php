@@ -25,6 +25,7 @@ class User extends Authenticatable
         'account_name',
         'bank_name',
         'wallet_balance',
+        'total_contacts',
         'phone',
         'email',
         'avatar',
@@ -49,5 +50,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'status' => 'boolean'
     ];
 }

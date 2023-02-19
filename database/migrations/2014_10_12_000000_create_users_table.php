@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('account_number')->nullable()->index();
             $table->string('account_name')->nullable()->index();
             $table->string('bank_name')->nullable()->index();
-            $table->string('wallet_balance')->default(0)->index();
+            $table->decimal('wallet_balance', 15, 2)->default(0)->index();
+            $table->integer('total_contacts')->default(0);
             $table->string('phone')->unique();
             $table->string('email')->unique();
             $table->string('avatar');

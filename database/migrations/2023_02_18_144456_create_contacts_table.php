@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('lastname')->nullable();
             $table->string('phone_number')->index();
             $table->string('email')->nullable();
-            $table->boolean('status');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }
