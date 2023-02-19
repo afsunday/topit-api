@@ -16,7 +16,7 @@ class WalletQuery
     {
         return WalletHistory::select(
             'wallet_histories.*',
-            'data_transactions.oderid as dt_oderid',
+            'data_transactions.orderid as dt_orderid',
             'data_transactions.statuscode AS dt_statuscode',
             'data_transactions.status AS dt_status',
             'data_transactions.ordertype AS dt_ordertype',
@@ -27,10 +27,20 @@ class WalletQuery
         )
         ->leftJoin('data_transactions', 'wallet_histories.data_transaction_id', 'data_transactions.id')
         ->where('wallet_histories.user_id', $userId)
-        ->orderBy('id', 'desc')
+        ->where(function ($query) use ($request) {
+            if ($request->has('search')) {
+                $query->where('wallet_histories.amount', 'LIKE', "%$request->search%")
+                ->orWhere('wallet_histories.payment_ref', 'LIKE', "%$request->search%")
+                ->orWhere('wallet_histories.method', 'LIKE', "%$request->search%")
+                ->orWhere('wallet_histories.description', 'LIKE', "%$request->search%")
+                ->orWhere('wallet_histories.status', 'LIKE', "%$request->search%")
+                ->orWhere('wallet_histories.date', 'LIKE', "%$request->search%");
+            }
+        })
         ->when(!is_null($limit), function ($query) use ($limit) {
             $query->limit($limit);
         })
+        ->orderBy('id', 'desc')
         ->when(true, function ($query) use ($limit) {
             is_null($limit)
                 ?  $query->simplePaginate()
@@ -41,8 +51,8 @@ class WalletQuery
     /**
      * Get all wallet transaxtion with associated user
      *
-     * @param $request
-     * @return Object
+     * @param Illuminate\Http\Request $request
+     * @return Illuminate\Eloquent\Database\Collection
      */
     public static function getWalletTransactions($request)
     {
@@ -53,7 +63,7 @@ class WalletQuery
             'users.email',
             'users.phone',
             'wallets.id as user_wallet_id',
-            'wallets.amount as current_balance'
+            'users.wallet_balance'
         )
         ->leftJoin('users', 'wallet_history.user_id', '=', 'users.id')
         ->leftJoin('wallets', 'users.id', '=', 'wallets.user_id')

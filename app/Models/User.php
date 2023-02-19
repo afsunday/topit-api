@@ -52,4 +52,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'status' => 'boolean'
     ];
+
+    /**
+     * get user data transactions
+     */
+    public function dataTransactions()
+    {
+        return $this->hasMany(DataTransaction::class);
+    }
 }

@@ -5,7 +5,7 @@ namespace App\Queries;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class DataProduct
+class DataProductQuery
 {
     /**
      * Get all data plans with complete rows.
